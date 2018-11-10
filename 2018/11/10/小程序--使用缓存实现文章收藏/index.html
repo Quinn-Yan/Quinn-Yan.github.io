@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Page({   data:{   },   onLoad: function(option) { var postId = option.id;  this.data.currentPostId = postId;   var postData = postsData.postList[postId];  this.setData({    //如果在onLoad方法中，不是异步的去执行一个数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序--使用缓存实现文章收藏">
+<meta property="og:url" content="http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/index.html">
+<meta property="og:site_name" content="Quinnyan">
+<meta property="og:description" content="Page({   data:{   },   onLoad: function(option) { var postId = option.id;  this.data.currentPostId = postId;   var postData = postsData.postList[postId];  this.setData({    //如果在onLoad方法中，不是异步的去执行一个数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-10T07:50:46.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小程序--使用缓存实现文章收藏">
+<meta name="twitter:description" content="Page({   data:{   },   onLoad: function(option) { var postId = option.id;  this.data.currentPostId = postId;   var postData = postsData.postList[postId];  this.setData({    //如果在onLoad方法中，不是异步的去执行一个数据">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>小程序--使用缓存实现文章收藏</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about">关于</a></li>
+         
+          <li><a href="/archives">归档</a></li>
+         
+          <li><a href="/categories">分类</a></li>
+         
+          <li><a href="/tags">标签</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/11/10/web安全http协议/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&text=小程序--使用缓存实现文章收藏"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&is_video=false&description=小程序--使用缓存实现文章收藏"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=小程序--使用缓存实现文章收藏&body=Check out this article: http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&name=小程序--使用缓存实现文章收藏&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        小程序--使用缓存实现文章收藏
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Quinnyan</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-11-10T07:47:05.000Z" itemprop="datePublished">2018-11-10</time>
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Page({</p>
+<p>  data:{</p>
+<p>  },</p>
+<p>  onLoad: function(option) {</p>
+<pre><code>var postId = option.id;
+
+this.data.currentPostId = postId; 
+
+var postData = postsData.postList[postId];
+
+this.setData({
+
+  //如果在onLoad方法中，不是异步的去执行一个数据绑定
+
+  //则不需要使用this.setData方法
+
+  //只需要使用this.data赋值即可实现数据绑定
+
+  //凡是涉及到数据绑定，用this.setData就行了。不管是不是在onLoad方法里
+
+  postData: postData
+
+})
+
+var postsCollected = wx.getStorageSync(&apos;posts_collected&apos;) 
+
+//获取所有数据缓存
+
+if (postsCollected //判断此数据缓存是否存在) {
+
+  var postCollected = postsCollected[postId];
+</code></pre><p>//存在则执行这段代码获取所有数据缓存的其中一条 </p>
+<pre><code>if (postCollected //判断是false/true) {
+
+   this.setData({
+
+  collected: postCollected   
+</code></pre><p>//将postCollected是false/true绑定到collected，而collected又绑定传值在wx:if=”“中； </p>
+<pre><code>  })
+
+  }
+
+}
+
+else{
+</code></pre><p>//一开始执行onLoad方法中postsCollected是没有的，所以判断中是执行了else的里的代码</p>
+<pre><code>  var postsCollected = {}; //一开始缓存数据为空，
+
+  postsCollected[postId] = false; //所以所有的页面内容都没有被收藏
+
+  wx.setStorageSync(&apos;posts_collected&apos;, postsCollected);
+
+  //设置一个缓存值
+
+}
+</code></pre><p>  },</p>
+<p>  onColletionTap: function(event) {</p>
+<pre><code>var postsCollected = wx.getStorageSync(&apos;posts_collected&apos;)
+
+var postCollected = postsCollected[this.data.currentPostId];
+
+// 收藏变成未收藏，未收藏变成收藏
+
+postCollected = !postCollected; //取反，false变成true；
+
+postsCollected[this.data.currentPostId] = postCollected;
+
+// 更新文章是否的缓存值
+
+wx.setStorageSync(&apos;posts_collected&apos;, postsCollected);
+
+// 更新数据绑定变量，从而实现切换图片，就是未收藏变成收藏的缓存值设置进去缓存值里
+
+  this.setData ({
+
+  collected: postCollected //取反的值（false变成了true）传递到wx:if=&quot;collected&quot;来决定下次点击，再取反由true变成false；
+
+})
+</code></pre><p>  }</p>
+<p>  })<br>      </p><p>当点击页面进入的时候先执行onLoad会把里面的代码都跑完，postsCollected还没设置数据和缓存值，也就是执行了else里的代码，所以所有的postId都是false；当点击一次触摸收藏后就有第一次数据并且有了缓存值；下次点开页面先执行完onLoad里面的代码也就有缓存值和数据了。就会显示上次点击收藏的文章数据是true即显示已收藏的图标；</p><p></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about">关于</a></li>
+         
+          <li><a href="/archives">归档</a></li>
+         
+          <li><a href="/categories">分类</a></li>
+         
+          <li><a href="/tags">标签</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&text=小程序--使用缓存实现文章收藏"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&is_video=false&description=小程序--使用缓存实现文章收藏"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=小程序--使用缓存实现文章收藏&body=Check out this article: http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&title=小程序--使用缓存实现文章收藏"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://www.quinnyan.top/2018/11/10/小程序--使用缓存实现文章收藏/&name=小程序--使用缓存实现文章收藏&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 严夫子
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about">关于</a></li>
+         
+          <li><a href="/archives">归档</a></li>
+         
+          <li><a href="/categories">分类</a></li>
+         
+          <li><a href="/tags">标签</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
